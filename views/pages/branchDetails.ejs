@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+<% include ../partials/nav.ejs %>
+
+<div class="container">
+<h2>Branch Details</h2>
+
+<ul>
+    <li> <b>ifsc - </b> <%= results.ifsc%></li>
+    <li> <b>bank_id - </b> <%= results.bank_id%></li>
+    <li> <b>branch - </b> <%= results.branch%></li>
+    <li> <b>address - </b> <%= results.address%></li>
+    <li> <b>city - </b> <%= results.city%></li>
+    <li> <b>district - </b> <%= results.district%></li>
+    <li> <b>state - </b> <%= results.state%></li>
+    <li> <b>bank_name - </b> <%= results.bank_name%></li>
+</ul>
+
+</div>
+
+</body>
+</html>

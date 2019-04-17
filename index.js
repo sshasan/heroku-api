@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 5000
 const { Pool } = require('pg');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: true
+  ssl: false
 });
 
 express()
@@ -13,34 +13,35 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
-  .get('/db', async (req, res) => {
+  .get('/branchDetails', async (req, res) => {
     try {
+      const ifscCode = req.query.ifscCode || null;
       const client = await pool.connect()
-      const result = await client.query('SELECT * FROM test_table');
-      const results = { 'results': (result) ? result.rows : null};
-      res.render('pages/db', results );
+      const query = "SELECT * FROM bank_branches where ifsc='"+ifscCode+"'";
+      console.log(query);
+      const result = await client.query(query);
+      const results = { 'results': (result) ? result.rows[0] : null};
+      res.render('pages/branchDetails', results );
       client.release();
     } catch (err) {
       console.error(err);
       res.send("Error " + err);
     }
   })
-  .get('/cool', (req, res) => res.send(cool()))
-  .get('/times', (req, res) => res.send(showTimes()))
-  .get('/name', (req, res) => res.send(showName()))
+  .get('/allBranches', async (req, res) => {
+    try {
+      const bankName = req.query.bankName || null;
+      const city = req.query.city || null;
+      const client = await pool.connect()
+      const query = "SELECT * FROM bank_branches where city='"+city+"' AND bank_name='"+bankName+"'";
+      console.log(query);
+      const result = await client.query(query);
+      const results = { 'results': (result) ? result.rows : null};
+      res.render('pages/allBranches', results );
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-
-
-showTimes = () => {
-  let result = ''
-  console.log(process.env);
-  const times = process.env.TIMES || 5
-  for (i = 0; i < times; i++) {
-    result += i + ' '
-  }
-  return result;
-}
-
-showName = () => {
-  return "Syed Saud Hasan";
-}
