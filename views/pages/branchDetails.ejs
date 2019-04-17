@@ -12,6 +12,7 @@
 <h2>Branch Details</h2>
 
 <ul>
+  <%if (results && Object.keys(results).length) { %>
     <li> <b>ifsc - </b> <%= results.ifsc%></li>
     <li> <b>bank_id - </b> <%= results.bank_id%></li>
     <li> <b>branch - </b> <%= results.branch%></li>
@@ -20,6 +21,9 @@
     <li> <b>district - </b> <%= results.district%></li>
     <li> <b>state - </b> <%= results.state%></li>
     <li> <b>bank_name - </b> <%= results.name%></li>
+  <% } else { %> 
+    <b style="color: red">Branch not found, Please check the IFSC code.</b>
+  <% }%>  
 </ul>
 
 </div>

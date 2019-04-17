@@ -9,12 +9,17 @@
 <% include ../partials/nav.ejs %>
 
 <div class="container">
+<%if (results && results.length) { %>
 <h2>All  <b style="color: green"><%= results[0].name%></b> branches in <b style="color: green"><%= results[0].city%></b></h2>
 <ul>
     <% results.forEach(function(result) { %>
         <li><b>ifsc - </b> <%= result.ifsc%>; <b>bank_id - </b> <%= result.bank_id%>; <b>branch - </b> <%= result.branch%>;  <b>address - </b> <%= result.address%>;  <b>city - </b> <%= result.city%>; <b>district - </b> <%= result.district%>; <b>state - </b> <%= result.state%>; <b>bank_name - </b> <%= result.name%></li>
     <% }); %>
 </ul>
+<% } else { %>
+  <h2>All branches</h2> 
+  <b style="color: red">Branch(s) not found, Please check the combination of city and Bank name.</b>
+<% }%>
 
 </div>
 
