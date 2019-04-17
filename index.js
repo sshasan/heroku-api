@@ -33,7 +33,7 @@ express()
       const bankName = req.query.bankName || null;
       const city = req.query.city || null;
       const client = await pool.connect()
-      const query = "SELECT * FROM (SELECT * FROM LEFT JOIN branches ON banks.id = branches.bank_id) as temp where temp.name='"+bankName+"' and temp.city='"+city+"'";
+      const query = "SELECT * FROM (SELECT * FROM banks LEFT JOIN branches ON banks.id = branches.bank_id) as temp where temp.name='"+bankName+"' and temp.city='"+city+"'";
       console.log(query);
       const result = await client.query(query);
       const results = { 'results': (result) ? result.rows : null};
