@@ -11,17 +11,20 @@
 
 
 #### APi documentation
-1.  endPoint: /branchDetails
+baseurl: `https://pacific-gorge-72179.herokuapp.com`    
+1.  endPoint: `/branchDetails`
     reqType: get
     Header: {ifscCode: <IFSC_CODE>}
     Output: complete details of this branch
 
-2.  endPoint: /allBranche
+2.  endPoint: `/allBranches`
     reqType: get
     Header: {bankName: <BANK_NAME>, city: <CITY>}
     Output: Complete details of all the branches matching this criteria
 
-
+#### Cases I have handled
+1. Case insensitive input for ifscCode, city and Bank Name ex. (``MUMBAI` and `mumbai` both will work)
+2. Wrong input passed ex. (city name as `mumba` will give an error)
 
 #### Where I looked into google
 1. How to host service on heroku
