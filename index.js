@@ -15,7 +15,7 @@ express()
   .get('/', (req, res) => res.render('pages/index'))
   .get('/branchDetails', async (req, res) => {
     try {
-      const ifscCode = req.query.ifscCode || null;
+      const ifscCode = (req.query && req.query.ifscCode) ? (req.query.ifscCode).toUpperCase() : null;
       const client = await pool.connect()
       const query = "SELECT * FROM (SELECT * FROM branches LEFT JOIN banks on branches.bank_id = banks.id) as temp where temp.ifsc='"+ifscCode+"'";
       const result = await client.query(query);
@@ -29,8 +29,8 @@ express()
   })
   .get('/allBranches', async (req, res) => {
     try {
-      const bankName = req.query.bankName || null;
-      const city = req.query.city || null;
+      const bankName = (req.query && req.query.bankName) ? (req.query.bankName).toUpperCase() : null;
+      const city = (req.query && req.query.city) ? (req.query.city).toUpperCase() : null;
       const client = await pool.connect()
       const query = "SELECT * FROM (SELECT * FROM banks LEFT JOIN branches ON banks.id = branches.bank_id) as temp where temp.name='"+bankName+"' and temp.city='"+city+"'";
       const result = await client.query(query);
