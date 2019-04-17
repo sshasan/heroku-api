@@ -18,9 +18,7 @@ express()
       const ifscCode = req.query.ifscCode || null;
       const client = await pool.connect()
       const query = "SELECT * FROM branches where ifsc='"+ifscCode+"'";
-      console.log(query);
       const result = await client.query(query);
-      console.log(result.rows[0]);
       const results = { 'results': (result) ? result.rows[0] : null};
       res.render('pages/branchDetails', results );
       client.release();
@@ -35,7 +33,6 @@ express()
       const city = req.query.city || null;
       const client = await pool.connect()
       const query = "SELECT * FROM (SELECT * FROM banks LEFT JOIN branches ON banks.id = branches.bank_id) as temp where temp.name='"+bankName+"' and temp.city='"+city+"'";
-      // console.log(query);
       const result = await client.query(query);
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/allBranches', results );
