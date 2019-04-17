@@ -17,7 +17,7 @@ express()
     try {
       const ifscCode = req.query.ifscCode || null;
       const client = await pool.connect()
-      const query = "SELECT * FROM branches where ifsc='"+ifscCode+"'";
+      const query = "SELECT * FROM (SELECT * FROM branches LEFT JOIN banks on branches.bank_id = banks.id) as temp where temp.ifsc='"+ifscCode+"'";
       const result = await client.query(query);
       const results = { 'results': (result) ? result.rows[0] : null};
       res.render('pages/branchDetails', results );
