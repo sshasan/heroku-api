@@ -17,7 +17,7 @@ express()
     try {
       const ifscCode = req.query.ifscCode || null;
       const client = await pool.connect()
-      const query = "SELECT * FROM bank_branches where ifsc='"+ifscCode+"'";
+      const query = "SELECT * FROM branches where ifsc='"+ifscCode+"'";
       console.log(query);
       const result = await client.query(query);
       const results = { 'results': (result) ? result.rows[0] : null};
@@ -33,7 +33,7 @@ express()
       const bankName = req.query.bankName || null;
       const city = req.query.city || null;
       const client = await pool.connect()
-      const query = "SELECT * FROM bank_branches where city='"+city+"' AND bank_name='"+bankName+"'";
+      const query = "SELECT * FROM branches where city='"+city+"' AND bank_name='"+bankName+"'";
       console.log(query);
       const result = await client.query(query);
       const results = { 'results': (result) ? result.rows : null};
