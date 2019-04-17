@@ -1,3 +1,38 @@
+#### Steps I have followed
+1. created an account on Heruko
+2. cloned getting-started-sample
+3. Added psql database in Heroku and local env
+4. imported sql file in both Heroku and local db
+5. added end points in index.js file for allBranches and branchDetails APi.
+6. added ejs file to handle the out put.
+7. tested on local machine > heroku local web
+8. Pushed local chnages to remote machine > git push heroku master
+9. deployed on remote machine > heroku open
+
+
+#### APi documentation
+1.  endPoint: /branchDetails
+    reqType: get
+    Header: {ifscCode: <IFSC_CODE>}
+    Output: complete details of this branch
+
+2.  endPoint: /allBranche
+    reqType: get
+    Header: {bankName: <BANK_NAME>, city: <CITY>}
+    Output: Complete details of all the branches matching this criteria
+
+
+
+#### Where I looked into google
+1. How to host service on heroku
+2. How to add psql service to heroku
+3. How to import sql file to heroku
+
+
+
+
+
+
 # node-js-getting-started
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
